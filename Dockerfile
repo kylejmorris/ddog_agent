@@ -8,7 +8,7 @@ COPY go.mod .
 COPY go.sum .
 RUN go mod download
 RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
-RUN go get github.com/olliefr/docker-gs-ping
+
 # Copy the source code. Note the slash at the end, as explained in
 # https://docs.docker.com/engine/reference/builder/#copy
 COPY *.go ./
