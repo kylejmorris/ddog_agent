@@ -14,7 +14,7 @@ RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 COPY *.go ./
 
 # Build
-RUN go build -o /docker-gs-ping
+RUN go build -o /go-hello-w
 
 # This is for documentation purposes only.
 # To actually open the port, runtime parameters
