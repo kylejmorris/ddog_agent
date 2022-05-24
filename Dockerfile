@@ -4,9 +4,9 @@ FROM golang:1.16-alpine
 WORKDIR /app
 
 # Download Go modules
-RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 COPY go.mod .
 COPY go.sum .
+RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 RUN go mod download
 
 
