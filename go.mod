@@ -21,5 +21,5 @@ require (
 	golang.org/x/sys v0.0.0-20210502180810-71e4cd670f79 // indirect
 	gopkg.in/airbrake/gobrake.v2 v2.0.9 // indirect
 	gopkg.in/gemnasium/logrus-airbrake-hook.v2 v2.1.2 // indirect
-	gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer 
+	gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer v1.2.3 // indirect
 )
