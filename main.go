@@ -6,6 +6,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
@@ -29,4 +30,12 @@ func main() {
 	}
 
 	e.Logger.Fatal(e.Start(":" + httpPort))
+
+	tracer.Start(
+            tracer.WithEnv("testing"),
+            tracer.WithService("test-go"),
+            tracer.WithServiceVersion("h123"),
+        )
+
+        defer tracer.Stop() 	
 }
