@@ -4,10 +4,11 @@ FROM golang:1.16-alpine
 WORKDIR /app
 
 # Download Go modules
+RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
 COPY go.mod .
 COPY go.sum .
 RUN go mod download
-RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+
 
 # Copy the source code. Note the slash at the end, as explained in
 # https://docs.docker.com/engine/reference/builder/#copy
