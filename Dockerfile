@@ -4,9 +4,10 @@ FROM golang:1.16-alpine
 WORKDIR /app
 
 # Download Go modules
-RUN go mod tidy
+
 COPY go.mod .
 COPY go.sum .
+RUN go mod tidy
 RUN go mod download
 
 
