@@ -28,4 +28,4 @@ EXPOSE 8080
 #ENV HTTP_PORT=8081
 
 # Run
-CMD [ "/docker-gs-ping" ]
+CMD [ "/go-hello-w" ]
