@@ -4,10 +4,10 @@ FROM golang:1.16-alpine
 WORKDIR /app
 
 # Download Go modules
-
 COPY go.mod .
 COPY go.sum .
-RUN go mod tidy
+RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+
 RUN go mod download
 
 
