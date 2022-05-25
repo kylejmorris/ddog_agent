@@ -39,5 +39,5 @@ func main() {
             tracer.WithAgentAddr("DD_AGENT_HOST:8126"),	
         )
 
-        defer tracer.Stop() 	
+        defer tracer.Stop()
 }
