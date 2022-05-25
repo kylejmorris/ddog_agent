@@ -35,6 +35,8 @@ func main() {
             tracer.WithEnv("testing"),
             tracer.WithService("test-go"),
             tracer.WithServiceVersion("h123"),
+	    tracer.WithUDS("/var/run/datadog/apm.socket"),
+            // tracer.WithAgentAddr("localhost:8126"),	
         )
 
         defer tracer.Stop() 	
