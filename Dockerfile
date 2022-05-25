@@ -7,6 +7,7 @@ WORKDIR /app
 COPY go.mod .
 COPY go.sum .
 RUN go get gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer
+
 RUN go mod download
 
 
