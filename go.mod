@@ -4,6 +4,8 @@ go 1.16
 
 require (
 	github.com/containerd/continuity v0.1.0 // indirect
+	github.com/gin-gonic/gin v1.7.0
+	github.com/gofiber/fiber v1.14.6 // indirect
 	github.com/labstack/echo/v4 v4.2.2
 	github.com/opencontainers/runc v1.0.0-rc93 // indirect
 	github.com/ory/dockertest/v3 v3.6.5

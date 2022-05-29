@@ -1,43 +1,31 @@
 package main
 
 import (
+	"fmt"
+	"math/rand"
 	"net/http"
-	"os"
+	"time"
 
-	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
+	httptrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/net/http"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 )
 
 func main() {
-
-	e := echo.New()
-
-	e.Use(middleware.Logger())
-	e.Use(middleware.Recover())
-
-	e.GET("/", func(c echo.Context) error {
-		return c.HTML(http.StatusOK, "Hello, Docker! <3")
-	})
-
-	e.GET("/ping", func(c echo.Context) error {
-		return c.JSON(http.StatusOK, struct{ Status string }{Status: "OK"})
-	})
-
-	httpPort := os.Getenv("HTTP_PORT")
-	if httpPort == "" {
-		httpPort = "8080"
-	}
-
-	e.Logger.Fatal(e.Start(":" + httpPort))
-
 	tracer.Start(
-            tracer.WithEnv("testing"),
-            tracer.WithService("test-go"),
-            tracer.WithServiceVersion("h123"),
-	   // tracer.WithUDS("/var/run/datadog/apm.socket"),
-            tracer.WithAgentAddr("DD_AGENT_HOST:8126"),
-        )
+		tracer.WithService("test"),
+		tracer.WithEnv("dev"),
+	)
+	defer tracer.Stop()
 
-        defer tracer.Stop()
+	// Create a traced mux router
+	mux := httptrace.NewServeMux()
+	// Continue using the router as you normally would.
+	mux.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+		if rand.Intn(100) >= 50 {
+			fmt.Println("uhoh slow inference :( let's debug why this sucks")
+			time.Sleep(10 * time.Second)
+		}
+		w.Write([]byte("Hello World!"))
+	})
+	http.ListenAndServe(":8080", mux)
 }
